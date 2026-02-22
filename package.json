@@ -1,0 +1,30 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "namaste react by Vivek",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivek9991/Namaste-react-by-vivek.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Vivek Chaudhary",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vivek9991/Namaste-react-by-vivek/issues"
+  },
+  "homepage": "https://github.com/vivek9991/Namaste-react-by-vivek#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}
