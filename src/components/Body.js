@@ -1,6 +1,7 @@
 import RestuarantCard from "./RestuarantCard";
 import React from "react";
 import DummyRestuarants, { EmptyList } from "./DummyRestuarants";
+import { Link } from "react-router-dom";
 const Body = () => {
   const [searchText, setSearchText] = React.useState("");
   let [masterRestuarantList, setMasterRestuarantList] = React.useState([]);
@@ -13,7 +14,7 @@ const Body = () => {
 
   async function getData() {
     const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5229107&lng=73.7610241&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      "https://proxy.corsfix.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5229107&lng=73.7610241&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
     );
     try {
       const data = await response.json();
@@ -60,7 +61,13 @@ const Body = () => {
           <EmptyList />
         ) : (
           restuarantList?.map((restuarant) => (
-            <RestuarantCard {...restuarant.info} key={restuarant.info.id} />
+            <Link
+              key={restuarant.info.id}
+              to={"/restuarant/" + restuarant.info.id}
+            >
+              {" "}
+              <RestuarantCard {...restuarant.info} key={restuarant.info.id} />
+            </Link>
           ))
         )}
       </div>
