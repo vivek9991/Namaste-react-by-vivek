@@ -9,6 +9,8 @@ import { Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import Cart from "./components/Cart";
 import RestuarantInfo from "./components/RestuarantInfo";
+import CompanyDetails from "./components/CompanyDetails";
+import CompanyDetailsClassBased from "./components/CompanyDetailsClassBased";
 
 const App = () => {
   return (
@@ -27,19 +29,25 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Body />,
       },
       {
-        path: "/about",
+        path: "about",
         element: <About />,
+        children: [
+          {
+            path: "company",
+            element: <CompanyDetails name="Vivek" />,
+          },
+        ],
       },
       {
-        path: "/contact-us",
+        path: "contact-us",
         element: <Contact />,
       },
       {
-        path: "/cart",
+        path: "cart",
         element: <Cart />,
       },
       {
