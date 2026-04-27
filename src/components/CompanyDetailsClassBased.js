@@ -27,10 +27,6 @@ class CompanyDetailsClassBased extends React.Component {
     console.log("child updated");
   }
 
-  componentWillUnmount() {
-    console.log("child about to unmonut");
-  }
-
   render() {
     return (
       <div>

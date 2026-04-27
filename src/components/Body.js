@@ -2,6 +2,7 @@ import RestuarantCard from "./RestuarantCard";
 import React from "react";
 import DummyRestuarants, { EmptyList } from "./DummyRestuarants";
 import { Link } from "react-router-dom";
+import useIsOnline from "./useIsOnline";
 const Body = () => {
   const [searchText, setSearchText] = React.useState("");
   let [masterRestuarantList, setMasterRestuarantList] = React.useState([]);
@@ -31,7 +32,11 @@ const Body = () => {
     }
   }
 
-  return (
+  const isOnline = useIsOnline();
+
+  return !isOnline ? (
+    <h1>"You are currently offline, please check your internet connection"</h1>
+  ) : (
     <>
       <input
         type="text"

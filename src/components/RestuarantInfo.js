@@ -1,29 +1,13 @@
 import { useParams } from "react-router-dom";
 import React from "react";
 import DummyRestuarants from "./DummyRestuarants";
+import useRestuarantAPI from "./useRestuarantAPI";
 const RestuarantInfo = () => {
-  const [restaurantDetails, setRestaurantDetails] = React.useState(null);
   const params = useParams();
-
-  async function getRestuarantDetails() {
-    const data = await fetch(
-      "https://proxy.corsfix.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5229107&lng=73.7610241&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
-    );
-    try {
-      const response = await data.json();
-      const filteredResData =
-        response.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle.restaurants.filter(
-          (restuarant) => restuarant.info.id === params.id,
-        )?.[0]?.info;
-      setRestaurantDetails(filteredResData);
-    } catch (e) {
-      console.log(e);
-    }
+  let restaurantDetails;
+  if (true) {
+    restaurantDetails = useRestuarantAPI(params.id);
   }
-
-  React.useEffect(() => {
-    getRestuarantDetails();
-  }, []);
 
   return (
     <div>

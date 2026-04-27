@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom/client";
+import { lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./Footer";
@@ -7,10 +8,13 @@ import About from "./components/About";
 import Error from "./components/Error";
 import { Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
-import Cart from "./components/Cart";
+// import Cart from "./components/Cart";
 import RestuarantInfo from "./components/RestuarantInfo";
 import CompanyDetails from "./components/CompanyDetails";
 import CompanyDetailsClassBased from "./components/CompanyDetailsClassBased";
+import DummyRestuarants from "./components/DummyRestuarants";
+
+const Cart = lazy(() => import("./components/Cart"));
 
 const App = () => {
   return (
@@ -48,7 +52,11 @@ const router = createBrowserRouter([
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <Suspense>
+            <Cart />
+          </Suspense>
+        ),
       },
       {
         path: "/restuarant/:id",
