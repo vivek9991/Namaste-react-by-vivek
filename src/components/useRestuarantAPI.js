@@ -1,4 +1,5 @@
 import React from "react";
+import data from "./restuarantData.json";
 
 const useRestuarantAPI = (resId) => {
   const [restaurantDetails, setRestaurantDetails] = React.useState(null);
@@ -21,7 +22,8 @@ const useRestuarantAPI = (resId) => {
       console.log(e);
     }
   }
-  return restaurantDetails;
+  // return restaurantDetails;
+  return data;
 };
 
 export default useRestuarantAPI;

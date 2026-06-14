@@ -1,6 +1,7 @@
 import { Title } from "./Title";
 import React from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../contextData";
 
 const Header = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
@@ -24,6 +25,11 @@ const Header = () => {
         <button onClick={handleUserLoginLogout}>
           {isUserLoggedIn ? "Logout" : "Login"}
         </button>
+        {isUserLoggedIn && (
+          <userContext.Consumer>
+            {(data) => data.loggedInUser + " " + data.loggedInPlace}
+          </userContext.Consumer>
+        )}
       </ul>
     </div>
   );

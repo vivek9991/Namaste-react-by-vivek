@@ -1,10 +1,15 @@
-import RestuarantCard from "./RestuarantCard";
-import React from "react";
+import RestuarantCard, { getRestuarantCardTopRated } from "./RestuarantCard";
+import * as React from "react";
 import DummyRestuarants, { EmptyList } from "./DummyRestuarants";
 import { Link } from "react-router-dom";
 import useIsOnline from "./useIsOnline";
+import { userContext } from "../contextData";
 const Body = () => {
+  const userData = React.useContext(userContext);
   const [searchText, setSearchText] = React.useState("");
+  const [localUserName, setLocalUserName] = React.useState(
+    userData.loggedInUser,
+  );
   let [masterRestuarantList, setMasterRestuarantList] = React.useState([]);
   const [restuarantList, setRestuarantList] =
     React.useState(masterRestuarantList);
@@ -34,6 +39,8 @@ const Body = () => {
 
   const isOnline = useIsOnline();
 
+  const RestuarantCardTopRated = getRestuarantCardTopRated(RestuarantCard);
+
   return !isOnline ? (
     <h1>"You are currently offline, please check your internet connection"</h1>
   ) : (
@@ -59,6 +66,22 @@ const Body = () => {
       >
         Search
       </button>
+
+      <input
+        type="text"
+        placeholder="Update username"
+        value={localUserName}
+        onChange={(e) => {
+          setLocalUserName(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          userData.setUserName(localUserName);
+        }}
+      >
+        Update username
+      </button>
       <div className="body">
         {masterRestuarantList?.length === 0 ? (
           <DummyRestuarants />
@@ -70,8 +93,14 @@ const Body = () => {
               key={restuarant.info.id}
               to={"/restuarant/" + restuarant.info.id}
             >
-              {" "}
-              <RestuarantCard {...restuarant.info} key={restuarant.info.id} />
+              {restuarant.info.avgRating > 4.5 ? (
+                <RestuarantCardTopRated
+                  {...restuarant.info}
+                  key={restuarant.info.id}
+                />
+              ) : (
+                <RestuarantCard {...restuarant.info} key={restuarant.info.id} />
+              )}
             </Link>
           ))
         )}

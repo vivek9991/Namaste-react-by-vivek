@@ -8,19 +8,22 @@ import About from "./components/About";
 import Error from "./components/Error";
 import { Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
-// import Cart from "./components/Cart";
+import * as React from "react";
 import RestuarantInfo from "./components/RestuarantInfo";
 import CompanyDetails from "./components/CompanyDetails";
 import CompanyDetailsClassBased from "./components/CompanyDetailsClassBased";
 import DummyRestuarants from "./components/DummyRestuarants";
-
+import { userContext } from "./contextData";
 const Cart = lazy(() => import("./components/Cart"));
 
 const App = () => {
+  const [userName, setUserName] = React.useState("Vivek");
   return (
     <>
       <Header />
-      <Outlet />
+      <userContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <Outlet />
+      </userContext.Provider>
       <Footer />
     </>
   );
