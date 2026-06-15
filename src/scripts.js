@@ -14,18 +14,20 @@ import CompanyDetails from "./components/CompanyDetails";
 import CompanyDetailsClassBased from "./components/CompanyDetailsClassBased";
 import DummyRestuarants from "./components/DummyRestuarants";
 import { userContext } from "./contextData";
+import reduxStore from "./store";
+import { Provider } from "react-redux";
 const Cart = lazy(() => import("./components/Cart"));
 
 const App = () => {
   const [userName, setUserName] = React.useState("Vivek");
   return (
-    <>
+    <Provider store={reduxStore}>
       <Header />
       <userContext.Provider value={{ loggedInUser: userName, setUserName }}>
         <Outlet />
       </userContext.Provider>
       <Footer />
-    </>
+    </Provider>
   );
 };
 

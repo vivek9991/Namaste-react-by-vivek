@@ -2,8 +2,11 @@ import { MdCurrencyRupee } from "react-icons/md";
 import { RESTUARANT_IMG_PREFIX } from "../constants";
 import * as React from "react";
 import { userContext } from "../contextData";
+import { useDispatch } from "react-redux";
+import { addItem } from "../cartSlice";
 const AccordianData = ({ accordianData }) => {
   const userData = React.useContext(userContext);
+  const dispatch = useDispatch();
   return (
     <div className="accordianData">
       {accordianData?.itemCards?.map((card) => {
@@ -40,7 +43,14 @@ const AccordianData = ({ accordianData }) => {
                 height={"auto"}
                 style={{ borderRadius: "10px" }}
               />
-              <button className="addBtn">ADD</button>
+              <button
+                className="addBtn"
+                onClick={() => {
+                  dispatch(addItem(card));
+                }}
+              >
+                ADD
+              </button>
             </div>
           </div>
         );
